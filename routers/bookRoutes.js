@@ -1,9 +1,10 @@
 import express from "express";
-import { getAllBooks } from "../controllers/bookControllers.js";
+import bookController from "../controllers/bookControllers.js"; // Asegúrate de que la ruta sea correcta
 
 const bookRouter = express.Router();
 
 // Definir las rutas
-bookRouter.get("/", getAllBooks); // Ruta para obtener todos los libros
+bookRouter.get("/", bookController.getAllBooks); // Cambia "/books" a "/" ya que ya estás usando el prefijo en app.js
+bookRouter.post("/", bookController.createBook);
 
 export default bookRouter; // Exportar el router

@@ -1,7 +1,7 @@
+// app.js
 import express from "express";
 import connection_db from "./database/connectionDb.js";
-import bookModel from "./models/bookModels.js"; // Importación correcta del modelo
-import bookRouter from "./routers/bookRoutes.js"; // Importación de las rutas
+import bookRouter from "./routers/bookRoutes.js";
 
 const app = express();
 
@@ -23,18 +23,17 @@ const startServer = async () => {
     await connection_db.authenticate();
     console.log("😍 Conexión exitosa a la base de datos");
 
-    // Sincronización del modelo
-    await bookModel.sync({ force: false }); // Asegúrate de que bookModel esté bien importado
-    console.log("🥳 Tabla de libros sincronizada");
+    // Iniciar el servidor
+    app.listen(8002, () => {
+      console.log("😃 Servidor corriendo en http://localhost:8002");
+    });
   } catch (error) {
     console.error("😢 Error en la conexión a la base de datos", error);
   }
-
-  // Iniciar el servidor
-  app.listen(8000, () => {
-    console.log("😃 Servidor corriendo en http://localhost:8000");
-  });
 };
 
 // Ejecutar la función para iniciar el servidor
 startServer();
+
+// Exportar la aplicación para pruebas
+export default app;
