@@ -13,7 +13,7 @@ Este proyecto es una API desarrollada en Node.js usando Express y Sequelize, con
 1. Clona el repositorio:
 
     ```bash
-    git clone https://github.com/tu-usuario/backend-book.git
+    git clone https://github.com/arthurmm77/backend-book.git
     ```
 
 2. Navega al directorio del proyecto:
