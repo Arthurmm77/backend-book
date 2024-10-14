@@ -1,7 +1,7 @@
 // test/bookController.test.js
 import request from "supertest";
 import { app, server } from "../app.js";
-import connection_db from "../database/connectionDb.js"; // Para cerrar la conexión
+import connection_db from "../database/connectionDb.js";
 
 describe("CRUD books", () => {
   let createdBookId;
@@ -47,10 +47,16 @@ describe("CRUD books", () => {
     };
 
     const response = await request(app)
-      .put(`/books/${createdBookId}`) // Usar el ID del libro creado
+      .put(`/books/${createdBookId}`)
       .send(updatedBookData);
 
     expect(response.statusCode).toBe(200);
     expect(response.body.message).toBe("Book updated successfully");
+  });
+  // Test para eliminar el libro
+  it("should delete a book", async () => {
+    const response = await request(app).delete(`/books/${createdBookId}`);
+    expect(response.statusCode).toBe(200);
+    expect(response.body.message).toBe("Book deleted successfully");
   });
 });

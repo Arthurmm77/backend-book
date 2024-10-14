@@ -63,8 +63,29 @@ export const updateBook = async (req, res) => {
   }
 };
 
+// Función para eliminar un libro por ID
+const deleteBook = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const book = await bookModel.findByPk(id);
+
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    await book.destroy(); // Eliminar el libro
+    res.status(200).json({ message: "Book deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting book:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while deleting the book" });
+  }
+};
+
 export default {
   getAllBooks,
   createBook,
   updateBook,
+  deleteBook,
 };

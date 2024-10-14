@@ -9,7 +9,7 @@ import {
 
 const connection_db = new Sequelize(DB_DATABASE_NAME, DB_USER, DB_PASSWORD, {
   host: DB_HOST,
-  dialect: "mysql", // O el dialecto que estés utilizando
+  dialect: "mysql",
 });
 
 // Probar la conexión
