@@ -32,8 +32,39 @@ const createBook = async (req, res) => {
     res.status(500).json({ error: "Error al crear el libro" });
   }
 };
+// Actualizar un libro
+export const updateBook = async (req, res) => {
+  const { id } = req.params;
+  const { title, author, description } = req.body;
+
+  try {
+    // Buscar el libro por su ID
+    const book = await bookModel.findByPk(id);
+
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    // Actualizar los campos del libro
+    book.title = title || book.title;
+    book.author = author || book.author;
+    book.description = description || book.description;
+
+    // Guardar los cambios
+    await book.save();
+
+    // Responder con éxito
+    return res.status(200).json({ message: "Book updated successfully" });
+  } catch (error) {
+    console.error("Error updating book:", error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while updating the book" });
+  }
+};
 
 export default {
   getAllBooks,
   createBook,
+  updateBook,
 };
